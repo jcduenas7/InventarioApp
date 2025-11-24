@@ -1,6 +1,7 @@
 package com.inventario.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 @Table(name = "productos")
@@ -10,18 +11,30 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @NotBlank(message = "El código es obligatorio")
+    @Size(min = 3, max = 50, message = "El código debe tener entre 3 y 50 caracteres")
+    @Pattern(regexp = "^[A-Z0-9-]+$", message = "El código solo puede contener letras mayúsculas, números y guiones")
     @Column(nullable = false, length = 50, unique = true)
     private String codigo;
     
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 5, max = 120, message = "El nombre debe tener entre 5 y 120 caracteres")
     @Column(nullable = false, length = 120)
     private String nombre;
     
+    @NotBlank(message = "La categoría es obligatoria")
     @Column(length = 50)
     private String categoria;
     
+    @NotNull(message = "El precio es obligatorio")
+    @DecimalMin(value = "1", message = "El precio debe ser mayor a 0")
+    @DecimalMax(value = "999999999", message = "El precio no puede exceder $999.999.999")
     @Column(nullable = false)
     private Double precio;
     
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock no puede ser negativo")
+    @Max(value = 999999, message = "El stock no puede exceder 999,999")
     @Column(nullable = false)
     private Integer stock;
     

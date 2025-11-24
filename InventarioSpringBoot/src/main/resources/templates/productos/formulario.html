@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,10 @@
         body {
             background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
             padding: 20px 0;
+            min-height: 100vh;
+        }
+        .invalid-feedback {
+            display: block;
         }
     </style>
 </head>
@@ -26,38 +31,81 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/productos}" th:method="post" th:object="${producto}">
+                        <form th:action="${producto.id != null} ? @{/productos/{id}(id=${producto.id})} : @{/productos}" 
+                              th:method="post" 
+                              th:object="${producto}">
                             <input type="hidden" th:field="*{id}">
 
                             <div class="mb-3">
                                 <label for="codigo" class="form-label">Código:</label>
-                                <input type="text" class="form-control" id="codigo" th:field="*{codigo}" required>
+                                <input type="text" 
+                                       class="form-control" 
+                                       th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid' : ''"
+                                       id="codigo" 
+                                       th:field="*{codigo}" 
+                                       placeholder="Ej: PROD-001"
+                                       th:readonly="${producto.id != null}"
+                                       required>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+                                <small class="form-text text-muted" th:if="${producto.id == null}">Solo letras mayúsculas, números y guiones</small>
+                                <small class="form-text text-muted" th:if="${producto.id != null}">El código no se puede modificar</small>
                             </div>
 
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required>
+                                <input type="text" 
+                                       class="form-control" 
+                                       th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''"
+                                       id="nombre" 
+                                       th:field="*{nombre}" 
+                                       placeholder="Nombre del producto"
+                                       required>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="categoria" class="form-label">Categoría:</label>
-                                <select class="form-control" id="categoria" th:field="*{categoria}">
+                                <select class="form-control" 
+                                        th:classappend="${#fields.hasErrors('categoria')} ? 'is-invalid' : ''"
+                                        id="categoria" 
+                                        th:field="*{categoria}"
+                                        required>
                                     <option value="">Seleccione...</option>
                                     <option value="Electronicos">Electrónicos</option>
                                     <option value="Accesorios">Accesorios</option>
                                     <option value="Muebles">Muebles</option>
                                     <option value="Ropa">Ropa</option>
                                 </select>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="precio" class="form-label">Precio:</label>
-                                <input type="number" class="form-control" id="precio" th:field="*{precio}" step="0.01" required>
+                                <label for="precio" class="form-label">Precio (COP):</label>
+                                <input type="number" 
+                                       class="form-control" 
+                                       th:classappend="${#fields.hasErrors('precio')} ? 'is-invalid' : ''"
+                                       id="precio" 
+                                       th:field="*{precio}" 
+                                       step="1" 
+                                       min="1"
+                                       max="999999999"
+                                       placeholder="Ej: 50000"
+                                       required>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
+                                <small class="form-text text-muted">Precio en pesos colombianos (máximo $999.999.999)</small>
                             </div>
 
                             <div class="mb-3">
                                 <label for="stock" class="form-label">Stock:</label>
-                                <input type="number" class="form-control" id="stock" th:field="*{stock}" required>
+                                <input type="number" 
+                                       class="form-control" 
+                                       th:classappend="${#fields.hasErrors('stock')} ? 'is-invalid' : ''"
+                                       id="stock" 
+                                       th:field="*{stock}" 
+                                       min="0"
+                                       placeholder="0"
+                                       required>
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
                             </div>
 
                             <div class="mb-3">

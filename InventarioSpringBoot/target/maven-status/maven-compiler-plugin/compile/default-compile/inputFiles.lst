@@ -1,5 +1,12 @@
-C:\Users\juaka\OneDrive\Documentos\NetBeansProjects\InventarioSpringBoot\src\main\java\com\inventario\repository\ProductoRepository.java
-C:\Users\juaka\OneDrive\Documentos\NetBeansProjects\InventarioSpringBoot\src\main\java\com\inventario\model\Producto.java
-C:\Users\juaka\OneDrive\Documentos\NetBeansProjects\InventarioSpringBoot\src\main\java\com\inventario\InventarioSpringBootApplication.java
-C:\Users\juaka\OneDrive\Documentos\NetBeansProjects\InventarioSpringBoot\src\main\java\com\inventario\service\ProductoService.java
-C:\Users\juaka\OneDrive\Documentos\NetBeansProjects\InventarioSpringBoot\src\main\java\com\inventario\controller\ProductoController.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/controller/ProductoController.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/model/Producto.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/repository/ProductoRepository.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/controller/AuthController.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/service/EstadisticasService.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/repository/UsuarioRepository.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/config/SecurityConfig.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/controller/DashboardController.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/InventarioSpringBootApplication.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/service/ProductoService.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/config/DataInitializer.java
+/workspaces/InventarioApp/InventarioSpringBoot/src/main/java/com/inventario/model/Usuario.java

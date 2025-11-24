@@ -18,6 +18,52 @@ public class ProductoService {
         return repository.findAll();
     }
 
+    // Buscar y filtrar productos
+    public List<Producto> buscarYFiltrar(String buscar, String categoria, String ordenar) {
+        List<Producto> productos = repository.findAll();
+
+        // Filtrar por búsqueda (código o nombre)
+        if (buscar != null && !buscar.trim().isEmpty()) {
+            String buscarLower = buscar.toLowerCase();
+            productos = productos.stream()
+                    .filter(p -> p.getCodigo().toLowerCase().contains(buscarLower) ||
+                               p.getNombre().toLowerCase().contains(buscarLower))
+                    .collect(java.util.stream.Collectors.toList());
+        }
+
+        // Filtrar por categoría
+        if (categoria != null && !categoria.trim().isEmpty() && !categoria.equals("Todas")) {
+            productos = productos.stream()
+                    .filter(p -> categoria.equals(p.getCategoria()))
+                    .collect(java.util.stream.Collectors.toList());
+        }
+
+        // Ordenar
+        if (ordenar != null && !ordenar.trim().isEmpty()) {
+            switch (ordenar) {
+                case "nombre":
+                    productos.sort(java.util.Comparator.comparing(Producto::getNombre));
+                    break;
+                case "precio_asc":
+                    productos.sort(java.util.Comparator.comparing(Producto::getPrecio));
+                    break;
+                case "precio_desc":
+                    productos.sort(java.util.Comparator.comparing(Producto::getPrecio).reversed());
+                    break;
+                case "stock_asc":
+                    productos.sort(java.util.Comparator.comparing(Producto::getStock));
+                    break;
+                case "stock_desc":
+                    productos.sort(java.util.Comparator.comparing(Producto::getStock).reversed());
+                    break;
+                default:
+                    productos.sort(java.util.Comparator.comparing(Producto::getId));
+            }
+        }
+
+        return productos;
+    }
+
     // Obtener por ID
     public Optional<Producto> obtenerPorId(Integer id) {
         return repository.findById(id);
@@ -52,7 +98,9 @@ public class ProductoService {
         }
 
         Producto producto = existente.get();
+        // No actualizar el código (es único e inmutable)
         if (p.getNombre() != null) producto.setNombre(p.getNombre());
+        if (p.getCategoria() != null) producto.setCategoria(p.getCategoria());
         if (p.getPrecio() != null) producto.setPrecio(p.getPrecio());
         if (p.getStock() != null) producto.setStock(p.getStock());
         if (p.getActivo() != null) producto.setActivo(p.getActivo());

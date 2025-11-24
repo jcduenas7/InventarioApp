@@ -1,5 +1,12 @@
-com\inventario\controller\ProductoController.class
-com\inventario\service\ProductoService.class
-com\inventario\model\Producto.class
-com\inventario\InventarioSpringBootApplication.class
-com\inventario\repository\ProductoRepository.class
+com/inventario/repository/UsuarioRepository.class
+com/inventario/model/Producto.class
+com/inventario/InventarioSpringBootApplication.class
+com/inventario/service/EstadisticasService.class
+com/inventario/config/SecurityConfig.class
+com/inventario/config/DataInitializer.class
+com/inventario/service/ProductoService.class
+com/inventario/controller/DashboardController.class
+com/inventario/controller/AuthController.class
+com/inventario/controller/ProductoController.class
+com/inventario/repository/ProductoRepository.class
+com/inventario/model/Usuario.class
